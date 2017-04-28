@@ -32,7 +32,7 @@ namespace Data
 
                 da.Fill(dt);
 
-                Joke j = new Joke() { jokeId = (int)dt.Rows[0]["JokeID"], title = (string)dt.Rows[0]["Title"], jokeText = (string)dt.Rows[0]["Joke"] };
+                Joke j = new Joke() { JokeId = (int)dt.Rows[0]["JokeID"], Title = (string)dt.Rows[0]["Title"], JokeText = (string)dt.Rows[0]["Joke"] };
 
                 return j;
             }
@@ -51,7 +51,7 @@ namespace Data
                 da.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
-                    Joke j = new Data.Joke() { jokeId = (int)row["JokeID"], title = (string)row["Title"], jokeText = (string)row["Joke"] };
+                    Joke j = new Data.Joke() { JokeId = (int)row["JokeID"], Title = (string)row["Title"], JokeText = (string)row["Joke"] };
                     jokes.Add(j);
                 }
 
@@ -60,31 +60,31 @@ namespace Data
             }
         }
 
-        public int AddJoke(Joke j)
+        public Joke AddJoke(Joke j)
         {
-            int jokeId;
-
             using (conn = GetConnection()) {
                 SqlCommand cmd = new SqlCommand() { Connection = conn, CommandType = CommandType.StoredProcedure, CommandText = "AddJoke" };
-                cmd.Parameters.AddWithValue("@Title", j.title);
-                cmd.Parameters.AddWithValue("@JokeText", j.jokeText);
+                cmd.Parameters.AddWithValue("@Title", j.Title);
+                cmd.Parameters.AddWithValue("@JokeText", j.JokeText);
                 conn.Open();
-                jokeId = Convert.ToInt32(cmd.ExecuteScalar());
+                j.JokeId = Convert.ToInt32(cmd.ExecuteScalar());
 
-                return jokeId;
+                return j;
             }
         }
 
-        public void UpdateJoke(Joke j)
+        public Joke UpdateJoke(Joke j)
         {
             using (conn = GetConnection())
             {
                 SqlCommand cmd = new SqlCommand() { Connection = conn, CommandType = CommandType.StoredProcedure, CommandText = "UpdateJoke" };
-                cmd.Parameters.AddWithValue("@JokeID", j.jokeId);
-                cmd.Parameters.AddWithValue("@Title", j.title);
-                cmd.Parameters.AddWithValue("@JokeText", j.jokeText);
+                cmd.Parameters.AddWithValue("@JokeID", j.JokeId);
+                cmd.Parameters.AddWithValue("@Title", j.Title);
+                cmd.Parameters.AddWithValue("@JokeText", j.JokeText);
                 conn.Open();
                 cmd.ExecuteNonQuery();
+
+                return j;
             }
         }
 

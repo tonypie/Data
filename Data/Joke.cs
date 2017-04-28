@@ -1,9 +1,19 @@
-﻿namespace Data
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace Data
 {
+    [Serializable]
+    [DataContract( Namespace = "")]
     public class Joke
     {
-        public int jokeId { get; set; }
-        public string title { get; set; }
-        public string jokeText { get; set; }
+        [DataMember]
+        public int JokeId { get; set; }
+
+        [DataMember]
+        public string Title { get; set; }
+
+        [DataMember]
+        public string JokeText { get; set; }
     }
 }

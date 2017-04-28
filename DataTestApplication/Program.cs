@@ -21,11 +21,11 @@ namespace DataTestApplication
             List<Joke> l = jdb.GetAllJokes();
             foreach(Joke jo in l)
             {
-                Console.WriteLine($"Joke ID : {jo.jokeId }, Title : { jo.title }, Joke : { jo.jokeText }");
+                Console.WriteLine($"Joke ID : {jo.JokeId }, Title : { jo.Title }, Joke : { jo.JokeText }");
             }
 
             Joke jok = jdb.GetJoke(4);
-            Console.WriteLine($"Joke ID : {jok.jokeId }, Title : { jok.title }, Joke : { jok.jokeText }");
+            Console.WriteLine($"Joke ID : {jok.JokeId }, Title : { jok.Title }, Joke : { jok.JokeText }");
         }
     }
 }
